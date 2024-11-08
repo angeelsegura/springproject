@@ -17,8 +17,8 @@ public class Carta {
 	private int idCarta;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "nom", nullable = false)
-	private TipoCarta nom;
+	@Column(name = "tipo", nullable = false)
+	private TipoCarta tipo;
 
 	@Column(name = "descripcio")
 	private String descripcio;
@@ -37,12 +37,12 @@ public class Carta {
 		this.idCarta = idCarta;
 	}
 
-	public TipoCarta getNom() {
-		return nom;
+	public TipoCarta getTipo() {
+		return tipo;
 	}
 
-	public void setNom(TipoCarta nom) {
-		this.nom = nom;
+	public void setTipo(TipoCarta nom) {
+		this.tipo = nom;
 	}
 
 	public String getDescripcio() {

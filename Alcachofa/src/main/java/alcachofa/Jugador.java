@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import alcachofa.Carta.TipoCarta;
 import jakarta.persistence.*;
 
 @Entity
@@ -25,7 +26,13 @@ public class Jugador {
 
 	@ManyToMany
 	@JoinTable(name = "jugador_carta", joinColumns = @JoinColumn(name = "id_jugador"), inverseJoinColumns = @JoinColumn(name = "id_carta"))
-	private Set<Carta> cartas = new HashSet<>();
+	private List<Carta> cartas = new ArrayList<>();
+	
+	private List<Carta> mano = new ArrayList<Carta>();
+	
+	private List<Carta> descartes = new ArrayList<Carta>();
+	
+	private List<Carta> alcachofas = new ArrayList<Carta>();
 
 	@ManyToMany(mappedBy = "jugadores")
 	private Set<Partida> partidas = new HashSet<>();
@@ -65,12 +72,30 @@ public class Jugador {
 		this.guanyar = guanyar;
 	}
 
-	public Set<Carta> getCartas() {
+	public List<Carta> getCartas() {
 		return cartas;
 	}
 
-	public void setCartas(Set<Carta> cartas) {
+	public void setCartas(List<Carta> cartas) {
 		this.cartas = cartas;
+	}
+	
+	public void inicializarMano() {
+		for (int i = 0; i < 10; i++) {
+			Carta carta = new Carta();
+			carta.setTipo(TipoCarta.CARXOFA);
+			alcachofas.add(carta);
+		}
+	}
+	
+	public void llenarMano() {
+		
+		if (alcachofas.size() >= 5) {
+			for (int i = 0; i < 5; i++) {
+				//TODO not finished
+			}
+		}
+		
 	}
 
 	public Set<Partida> getPartidas() {

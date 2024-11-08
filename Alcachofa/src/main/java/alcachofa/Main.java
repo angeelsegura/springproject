@@ -35,7 +35,7 @@ public class Main {
             session.beginTransaction();
 
             Carta carta1 = new Carta();
-            carta1.setNom(TipoCarta.CARXOFA);
+            carta1.setTipo(TipoCarta.CARXOFA);
             carta1.setDescripcio("No fa cap acció");
 
             Jugador jugador1 = new Jugador();

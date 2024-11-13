@@ -1,5 +1,8 @@
 package alcachofa;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +17,7 @@ public class Main {
 	static SessionFactory sessionFactory;
 	static ServiceRegistry serviceRegistry;
 	
-	public static synchronized SessionFactory getSessionFactory() {
+	/*public static synchronized SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			// exception handling omitted for brevityaa
 			// serviceRegistry = new
@@ -24,13 +27,13 @@ public class Main {
 			sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 		}
 		return sessionFactory;
-	}
+	}*/
 	
 	public static void main(String[] args) {
 		Session session = null;
 		Transaction transaction = null;
 		
-		try {
+		/*try {
 			session = getSessionFactory().openSession();
             session.beginTransaction();
 
@@ -62,7 +65,36 @@ public class Main {
         } finally {
             session.close();
             sessionFactory.close();
-        }
+        }*/
+		
+		
+		Jugador jugador = new Jugador("Jugador1");
+		Set<Jugador> jugadores = new HashSet<>();
+		jugadores.add(jugador);
+		
+		Partida partida = new Partida(jugadores);
+		partida.generarBaraja();
+		
+		
+		partida.mezclarBaraja();
+		
+		jugador.inicializarBaraja();
+		jugador.llenarMano();
+		jugador.mostrarMano();
+		
+		System.out.println("-------------------");
+		
+		partida.generarTienda();
+		partida.mostrarTienda();
+		
+		partida.escogerVerdura(4, 0);
+		
+		jugador.descartarMano();
+		jugador.mostrarMano();
+		System.out.println("-------------------");
+		jugador.mostrarDescartes();
+		
+		
     
 	}
 

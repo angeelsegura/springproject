@@ -38,6 +38,10 @@ public class Partida {
 		return idPartida;
 	}
 
+	public Partida(Set<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
+	
 	public void setIdPartida(int idPartida) {
 		this.idPartida = idPartida;
 	}
@@ -62,7 +66,7 @@ public class Partida {
 		return cartas;
 	}
 
-	public List<Carta> generarBaraja() {
+	public void generarBaraja() {
 		List<Carta> cartas = new ArrayList<Carta>();
 		for (TipoCarta c : TipoCarta.values()) {
 			for (int i = 0; i < 6; i++) {
@@ -71,7 +75,7 @@ public class Partida {
 				cartas.add(carta);
 			}
 		}
-		return cartas;
+		 this.cartas = cartas;
 	}
 
 	public void generarTienda() {
@@ -86,8 +90,29 @@ public class Partida {
 			tienda = cartas;
 			cartas.clear();
 		}
-
 	}
+	
+	
+	public void mostrarTienda() {
+        for (int i = 0; i < tienda.size(); i++) {
+            System.out.println(i + " - " + tienda.get(i).getTipo());
+        }
+	}
+	
+
+	public void escogerVerdura(int idx, int jugadorId) {
+		if (tienda.size() > idx) {
+			for (Jugador j : jugadores) {
+				if (j.getIdJugador() == jugadorId) {
+					j.recibirVerdura(tienda.get(idx));
+					tienda.remove(idx);
+					actualizarTienda();
+					break;
+				}
+			}
+		}	
+	}
+	
 	
 	public void actualizarTienda() {
 		if (cartas.size() > 0 && tienda.size() < 5) {

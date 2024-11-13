@@ -3,6 +3,7 @@ package alcachofa;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import alcachofa.Carta.TipoCarta;
@@ -80,7 +81,11 @@ public class Jugador {
 		this.cartas = cartas;
 	}
 	
-	public void inicializarMano() {
+	public Jugador(String nombre) {
+		this.alias = nombre;
+	}
+	
+	public void inicializarBaraja() {
 		for (int i = 0; i < 10; i++) {
 			Carta carta = new Carta();
 			carta.setTipo(TipoCarta.CARXOFA);
@@ -89,13 +94,71 @@ public class Jugador {
 	}
 	
 	public void llenarMano() {
-		
 		if (alcachofas.size() >= 5) {
 			for (int i = 0; i < 5; i++) {
-				//TODO not finished
+				mano.add(alcachofas.get(i));
 			}
+			for (int i = 0; i < 5; i++) {
+				alcachofas.remove(0);
+			}
+		} else {
+			recuperarBaraja();
+			llenarMano();
 		}
-		
+	}
+	
+	public void recibirVerdura(Carta carta) {
+		mano.add(carta);
+	}
+	
+	public boolean comprovarVictoria() {
+		for (Carta carta : mano) {
+			if (carta.getTipo() == TipoCarta.CARXOFA) {
+				return false;
+			}
+		} return true;
+	}
+	
+	public void mostrarMano() {
+		for (int i = 0; i < mano.size(); i++) {
+			System.out.println(i + " - " + mano.get(i).getTipo());
+		}
+	}
+	
+	public void mostrarDescartes() {
+		for (int i = 0; i < descartes.size(); i++) {
+			System.out.println(i + " - " + descartes.get(i).getTipo());
+		}
+	}
+	
+	public void descartarMano() {
+		for (Carta carta : mano) {
+			descartes.add(carta);
+		}
+		mano.clear();
+	}
+	
+	public void recuperarBaraja() {
+		for (Carta carta : descartes) {
+			alcachofas.add(carta);
+		}
+		descartes.clear();
+		mezclarBaraja();
+	}
+	
+	public void mezclarBaraja() {
+		Random rd = new Random();
+		int max = alcachofas.size();
+
+		List<Carta> barajada = new ArrayList<Carta>();
+		while (max != 0) {
+			int idx = rd.nextInt(max);
+			barajada.add(alcachofas.get(idx));
+			alcachofas.remove(idx);
+			max--;
+		}
+
+		alcachofas = barajada;
 	}
 
 	public Set<Partida> getPartidas() {

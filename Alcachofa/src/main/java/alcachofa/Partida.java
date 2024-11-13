@@ -31,8 +31,7 @@ public class Partida {
 
 	private List<Carta> tienda = new ArrayList<Carta>();
 
-	@OneToMany(mappedBy = "partida")
-	private Set<Jugar> jugadas = new HashSet<>();
+	 
 
 	public int getIdPartida() {
 		return idPartida;
@@ -140,11 +139,5 @@ public class Partida {
 		this.cartas = cartas;
 	}
 
-	public Set<Jugar> getJugadas() {
-		return jugadas;
-	}
-
-	public void setJugadas(Set<Jugar> jugadas) {
-		this.jugadas = jugadas;
-	}
+	 
 }

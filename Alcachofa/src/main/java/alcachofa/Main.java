@@ -85,9 +85,7 @@ public class Main {
 		
 		System.out.println("-------------------");
 		
-		GenericDaoImpl<Jugador, Integer> daoPartida = new GenericDaoImpl<Jugador, Integer>();
 		
-		daoPartida.insert(jugador);
 		
 		partida.generarTienda();
 		partida.mostrarTienda();
@@ -100,6 +98,30 @@ public class Main {
 		jugador.mostrarDescartes();
 		
 		
+		  try {
+	            // Crear un nuevo jugador
+	            Jugador nuevoJugador = new Jugador("nombre");
+	            nuevoJugador.setNumeroPartides(0);
+	            nuevoJugador.setGuanyar(false);
+
+	            JugadorDAO jugadorDAO = new JugadorDAO();
+	            
+	            CartaDAO cartaDAO = new CartaDAO();
+	            
+	            
+	            jugadorDAO.insertJugador(nuevoJugador);
+	            System.out.println("Jugador insertado con ID: " + nuevoJugador.getIdJugador());
+	            
+	           
+	            cartaDAO.insertCarta( partida.getCartas().get(0));
+	            System.out.println("Jugador eliminado con ID: " + nuevoJugador.getIdJugador());
+
+	            
+	            
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
     
 	}
 

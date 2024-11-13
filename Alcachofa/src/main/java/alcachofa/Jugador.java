@@ -25,6 +25,7 @@ public class Jugador {
 	@Column(name = "guanyar", nullable = false)
 	private boolean guanyar = false;
 
+	
 	@ManyToMany
 	@JoinTable(name = "jugador_carta", joinColumns = @JoinColumn(name = "id_jugador"), inverseJoinColumns = @JoinColumn(name = "id_carta"))
 	private List<Carta> cartas = new ArrayList<>();
@@ -38,8 +39,7 @@ public class Jugador {
 	@ManyToMany(mappedBy = "jugadores")
 	private Set<Partida> partidas = new HashSet<>();
 
-	@OneToMany(mappedBy = "jugador")
-	private Set<Jugar> jugadas = new HashSet<>();
+	 
 
 	public int getIdJugador() {
 		return idJugador;
@@ -169,11 +169,5 @@ public class Jugador {
 		this.partidas = partidas;
 	}
 
-	public Set<Jugar> getJugadas() {
-		return jugadas;
-	}
-
-	public void setJugadas(Set<Jugar> jugadas) {
-		this.jugadas = jugadas;
-	}
+	 
 }

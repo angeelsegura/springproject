@@ -66,7 +66,7 @@ public class Partida {
 		return cartas;
 	}
 
-	public void generarBaraja() {
+	public void  generarBaraja() {
 		List<Carta> cartas = new ArrayList<Carta>();
 		for (TipoCarta c : TipoCarta.values()) {
 			for (int i = 0; i < 6; i++) {

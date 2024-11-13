@@ -68,6 +68,7 @@ public class Main {
         }*/
 		
 		
+		
 		Jugador jugador = new Jugador("Jugador1");
 		Set<Jugador> jugadores = new HashSet<>();
 		jugadores.add(jugador);
@@ -83,6 +84,10 @@ public class Main {
 		jugador.mostrarMano();
 		
 		System.out.println("-------------------");
+		
+		GenericDaoImpl<Jugador, Integer> daoPartida = new GenericDaoImpl<Jugador, Integer>();
+		
+		daoPartida.insert(jugador);
 		
 		partida.generarTienda();
 		partida.mostrarTienda();
